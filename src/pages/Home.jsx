@@ -33,18 +33,31 @@ export default function Home() {
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+  //Clear filter
+  const clearFilters = () => {
+    setLocationFilter("");
+    setDateFilter(""); // Assuming dateFilter is initially null
+    setEventTypeFilter("");
+    setSearchActive(false);
+    setFilteredPosts(posts); // Reset to show all posts
+  };
+
   // Filter posts based on the criteria
   const filterPosts = () => {
     let newFilteredPosts = [...posts];
 
+    // Apply filters only if any filter is active
     if (locationFilter || dateFilter || eventTypeFilter) {
       newFilteredPosts = newFilteredPosts.filter((post) => {
         const matchLocation = locationFilter
           ? post.location.toLowerCase().includes(locationFilter.toLowerCase())
           : true;
+
         const matchDate = dateFilter
-          ? new Date(post.eventStartDate).toDateString() === new Date(dateFilter).toDateString()
+          ? new Date(post.eventStartDate) <= new Date(dateFilter) &&
+            new Date(post.eventEndDate) >= new Date(dateFilter)
           : true;
+
         const matchEventType = eventTypeFilter
           ? post.eventType.toLowerCase().includes(eventTypeFilter.toLowerCase())
           : true;
@@ -53,6 +66,7 @@ export default function Home() {
       });
       setSearchActive(true); // Filters are applied
     } else {
+      newFilteredPosts = [...posts]; // Reset to all posts when no filters are active
       setSearchActive(false); // No filters applied
     }
 
@@ -280,15 +294,22 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full">
+            <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full me-2">
               <input
-                type="date"
+                type="datetime-local"
                 placeholder="Filter by date"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
                 className="border-white outline-none border-0 w-full rounded-xl p-2"
               />
             </div>
+
+            <button
+              onClick={clearFilters}
+              className="bg-red-500 text-white border-none py-2 px-4 cursor-pointer rounded-md hover:bg-red-600"
+            >
+              Clear Filters
+            </button>
           </div>
 
           {/* Display filtered posts */}
