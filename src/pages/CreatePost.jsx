@@ -142,7 +142,7 @@ export default function CreatePost() {
               }}
               className="font-bold text-blue-600 text-sm"
             >
-              Share
+              Create
             </button>
           </div>
 

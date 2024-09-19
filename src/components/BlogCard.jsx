@@ -100,88 +100,120 @@ export default function BlogCard({
   };
 
   return (
-    <div className="card border border-[rgb(173, 173, 173)] rounded-sm mb-1">
-      {/* card header */}
-      <div className="flex justify-start items-center p-2">
-        <img className="w-[45px] h-[45px] rounded-full me-5" src={post.user.image} alt="" />
-        <span
-          onClick={() => {
-            OtherUserPage(post.user._id);
-          }}
-          className="font-semibold cursor-pointer hover:text-blue-800 hover:font-bold hover:underline transition-colors"
-        >
-          @ {post.user.username}
-        </span>
-      </div>
-      {/* card post image */}
-      <div className="">
-        <img className="w-full h-max" src={post.image} alt="" />
-      </div>
-      {/* card content */}
-      <div className="py-2 px-1 flex justify-between items-center border border-[rgb(173, 173, 173)]">
-        <div className="">
-          {isLiked ? (
+    <div className="m-2 w-1/3">
+      <div className="card border border-[rgb(173, 173, 173)] rounded-sm ">
+        {/* card header */}
+        <div className="flex justify-between items-center p-2 border-b border-[rgb(173, 173, 173)]">
+          <div className="flex items-center space-x-4">
+            <img className="w-[45px] h-[45px] rounded-full me-5" src={post.user.image} alt="" />
             <span
-              onClick={likePost}
-              className="material-symbols-outlined material-symbols-outlined-red me-2 text-2xl cursor-pointer"
+              onClick={() => {
+                OtherUserPage(post.user._id);
+              }}
+              className="font-semibold cursor-pointer hover:text-blue-800 hover:font-bold hover:underline transition-colors"
             >
-              favorite
+              Event organized by : @{post.user.username}
             </span>
-          ) : (
-            <span
-              onClick={likePost}
-              className="material-symbols-outlined me-2 text-2xl cursor-pointer"
-            >
-              favorite
-            </span>
-          )}
-          <span className="material-symbols-outlined me-2 text-2xl">maps_ugc</span>
-          <span className="material-symbols-outlined text-2xl">send</span>
+          </div>
+          <span className="text-sm text-gray-600">
+            Event date : {new Date(post.eventDate).toLocaleDateString()}{" "}
+            {/* Format date as needed */}
+          </span>
         </div>
-        <span className="material-symbols-outlined text-2xl">bookmark</span>
-      </div>
 
-      {/* card footer */}
-      <div className="px-2">
-        <span className="pe-2">{likesCount}</span>
-        <span>likes</span>
-      </div>
+        {/* card post image */}
+        <div className="w-full aspect-w-4 aspect-h-2">
+          <img className="object-cover w-full h-full" src={post.image} alt="" />
+        </div>
+        {/* card content */}
+        <div className="py-2 px-1 flex justify-between items-center border border-[rgb(173, 173, 173)]">
+          <div className="">
+            {isLiked ? (
+              <span
+                onClick={likePost}
+                className="material-symbols-outlined material-symbols-outlined-red me-2 text-2xl cursor-pointer"
+              >
+                favorite
+              </span>
+            ) : (
+              <span
+                onClick={likePost}
+                className="material-symbols-outlined me-2 text-2xl cursor-pointer"
+              >
+                favorite
+              </span>
+            )}
+            <span className="material-symbols-outlined me-2 text-2xl">maps_ugc</span>
+            <span className="material-symbols-outlined text-2xl">send</span>
+          </div>
+          <span className="material-symbols-outlined text-2xl">bookmark</span>
+        </div>
+        {/* card footer */}
+        <div className="px-2">
+          <span className="pe-2">{likesCount}</span>
+          <span>likes</span>
+        </div>
+        {/* title / description */}
+        <div className="my-2 border-t border-[rgb(173, 173, 173)]">
+          <div className="px-2 text-lg text-black ">
+            <p>
+              <span className="font-bold">Title : @</span>
+              {post.title}
+            </p>
+          </div>
+          <div className="px-2">
+            <p>
+              <span className="font-bold">Description : @</span>
+              {post.disc}
+            </p>
+          </div>
+        </div>
 
-      {/* description  */}
-      <div className="p-2">
-        <p>@ {post.disc}</p>
-      </div>
+        {/* event details */}
+        <div className="px-2 py-1 border-t border-[rgb(173, 173, 173)]">
+          <div className="flex justify-between items-center text-sm text-gray-600">
+            <span className="text-black ">
+              <span className="font-bold ">Location :</span> {post.location}
+            </span>
+            <span className="text-black ">
+              <span className="font-bold">Event Type :</span> {post.eventType}
+            </span>
+            <span className="text-black ">
+              <span className="font-bold">Max Attendees :</span> {post.attendees}
+            </span>
+          </div>
+        </div>
 
-      {/* show comments */}
-      <p
-        className="font-bold cursor-pointer ms-2 text-sm hover:text-blue-600 transition-colors "
-        onClick={() => {
-          setMyPostId(post._id);
-        }}
-      >
-        Show All {commentCount} Comments
-      </p>
-
-      {/* add comments */}
-      <div className="flex items-center">
-        <span className="material-symbols-outlined">mood</span>
-        <input
-          className="outline-none border border-gray-200 p-1 text-sm rounded-lg w-full mx-2"
-          type="text"
-          value={comment}
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-          placeholder="Add Comments..."
-        />
-        <button
+        {/* show comments */}
+        <p
+          className="font-bold cursor-pointer ms-2 text-sm hover:text-blue-600 transition-colors "
           onClick={() => {
-            addComment(post);
+            setMyPostId(post._id);
           }}
-          className="px-1 pb-2 text-lg text-blue-800 font-semibold"
         >
-          post
-        </button>
+          Show All {commentCount} Comments
+        </p>
+        {/* add comments */}
+        <div className="flex items-center">
+          <span className="material-symbols-outlined">mood</span>
+          <input
+            className="outline-none border border-gray-200 p-1 text-sm rounded-lg w-full mx-2"
+            type="text"
+            value={comment}
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            placeholder="Add Comments..."
+          />
+          <button
+            onClick={() => {
+              addComment(post);
+            }}
+            className="px-1 pb-2 text-lg text-blue-800 font-semibold"
+          >
+            post
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -194,6 +226,11 @@ BlogCard.propTypes = {
       image: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
     }).isRequired,
+    eventDate: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    eventType: PropTypes.string.isRequired,
+    attendees: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
     disc: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,

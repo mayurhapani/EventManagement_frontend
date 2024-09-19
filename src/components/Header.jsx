@@ -12,7 +12,7 @@ export default function Header() {
         <div className="container mx-auto">
           <div className="flex justify-between items-center">
             <h1 className="text-xl md:text-3xl font-bold text-gray-600 ">Sundaram Enterprise</h1>
-            <div className={`${isLoggedIn ? "block" : "hidden"} w-1/3 my-3`}>
+            {/* <div className={`${isLoggedIn ? "block" : "hidden"} w-1/3 my-3`}>
               <form method="GET" action="">
                 <div className="bg-white border-2  shadow p-2 relative rounded-xl flex">
                   <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
@@ -41,7 +41,7 @@ export default function Header() {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
             <nav>
               <ul className="flex">
                 <Link to="/signin" className={isLoggedIn ? "hidden" : "block"}>
