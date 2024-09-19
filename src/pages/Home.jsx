@@ -43,7 +43,7 @@ export default function Home() {
           ? post.location.toLowerCase().includes(locationFilter.toLowerCase())
           : true;
         const matchDate = dateFilter
-          ? new Date(post.eventDate).toDateString() === new Date(dateFilter).toDateString()
+          ? new Date(post.eventStartDate).toDateString() === new Date(dateFilter).toDateString()
           : true;
         const matchEventType = eventTypeFilter
           ? post.eventType.toLowerCase().includes(eventTypeFilter.toLowerCase())
@@ -58,13 +58,13 @@ export default function Home() {
 
     // Categorize events
     const now = new Date();
-    setUpcomingEvents(newFilteredPosts.filter((post) => new Date(post.eventDate) > now));
+    setUpcomingEvents(newFilteredPosts.filter((post) => new Date(post.eventStartDate) > now));
     setCurrentEvents(
       newFilteredPosts.filter(
-        (post) => new Date(post.eventDate).toDateString() === now.toDateString()
+        (post) => new Date(post.eventStartDate).toDateString() === now.toDateString()
       )
     );
-    setPastEvents(newFilteredPosts.filter((post) => new Date(post.eventDate) < now));
+    setPastEvents(newFilteredPosts.filter((post) => new Date(post.eventEndDate) < now));
 
     setFilteredPosts(newFilteredPosts);
   };
@@ -92,29 +92,32 @@ export default function Home() {
           },
         });
 
-        const allPosts = response.data.reverse();
-        const currentDate = new Date(); // Current date
+        // Inside fetchPosts function
+        const allPosts = response.data.reverse(); // Make sure you are getting the correct response
 
-        // Categorize events
+        // Update categorization
+        const now = new Date();
         const upcoming = [];
         const current = [];
         const past = [];
 
         allPosts.forEach((post) => {
-          const eventDate = new Date(post.eventDate);
+          const eventStartDate = new Date(post.eventStartDate);
+          const eventEndDate = new Date(post.eventEndDate);
 
-          if (eventDate.toDateString() === currentDate.toDateString()) {
-            // Event is happening today, so it belongs in "Current Events" only
+          if (eventStartDate <= now && eventEndDate > now) {
+            // Currently running event
             current.push(post);
-          } else if (eventDate > currentDate) {
-            // Event is in the future (excluding today)
+          } else if (eventStartDate > now) {
+            // Upcoming event
             upcoming.push(post);
-          } else {
-            // Event is in the past
+          } else if (eventEndDate < now) {
+            // Past event
             past.push(post);
           }
         });
 
+        // Set states
         setPosts(allPosts);
         setUpcomingEvents(upcoming);
         setCurrentEvents(current);
@@ -253,7 +256,6 @@ export default function Home() {
                 onChange={(e) => setLocationFilter(e.target.value)}
               />
             </div>
-            
 
             <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full mx-2">
               <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
@@ -277,7 +279,6 @@ export default function Home() {
                 onChange={(e) => setEventTypeFilter(e.target.value)}
               />
             </div>
-           
 
             <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full">
               <input

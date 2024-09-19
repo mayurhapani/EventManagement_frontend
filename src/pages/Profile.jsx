@@ -279,7 +279,7 @@ export default function Profile() {
                     setViewMyPost(true);
                     setMyPostId(post._id);
                   }}
-                  className="border border-gray-300 w-full aspect-square cursor-pointer"
+                  className="border border-gray-300 w-full aspect-square cursor-pointer h-full"
                 >
                   <img className="w-full h-full" src={post.image} alt="" />
                 </div>

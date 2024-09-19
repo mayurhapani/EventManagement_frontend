@@ -100,7 +100,7 @@ export default function BlogCard({
   };
 
   return (
-    <div className="m-2 w-1/3">
+    <div className="p-2 w-1/3">
       <div className="card border border-[rgb(173, 173, 173)] rounded-sm ">
         {/* card header */}
         <div className="flex justify-between items-center p-2 border-b border-[rgb(173, 173, 173)]">
@@ -115,10 +115,25 @@ export default function BlogCard({
               Event organized by : @{post.user.username}
             </span>
           </div>
-          <span className="text-sm text-gray-600">
-            Event date : {new Date(post.eventDate).toLocaleDateString()}{" "}
-            {/* Format date as needed */}
-          </span>
+          <div>
+            <span className="text-sm text-gray-600">
+              Start : {new Date(post.eventStartDate).toLocaleDateString()}{" "}
+              {new Date(post.eventStartDate).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </span>
+            <br />
+            <span className="text-sm text-gray-600">
+              End : {new Date(post.eventEndDate).toLocaleDateString()}{" "}
+              {new Date(post.eventEndDate).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true,
+              })}
+            </span>
+          </div>
         </div>
 
         {/* card post image */}
@@ -226,7 +241,8 @@ BlogCard.propTypes = {
       image: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
     }).isRequired,
-    eventDate: PropTypes.string.isRequired,
+    eventStartDate: PropTypes.string.isRequired,
+    eventEndDate: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     eventType: PropTypes.string.isRequired,

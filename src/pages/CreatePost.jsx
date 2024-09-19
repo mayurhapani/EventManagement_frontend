@@ -13,7 +13,8 @@ export default function CreatePost() {
   const [image, setImage] = useState(null);
   const [disc, setDisc] = useState("");
   const [title, setTitle] = useState("");
-  const [eventDate, setEventDate] = useState("");
+  const [eventStartDate, setEventStartDate] = useState("");
+  const [eventEndDate, setEventEndDate] = useState("");
   const [location, setLocation] = useState("");
   const [eventType, setEventType] = useState("");
   const [attendees, setAttendees] = useState("");
@@ -60,7 +61,15 @@ export default function CreatePost() {
     try {
       const token = localStorage.getItem("token");
 
-      if (!image || !disc || !title || !eventDate || !location || !attendees) {
+      if (
+        !image ||
+        !disc ||
+        !title ||
+        !eventStartDate ||
+        !eventEndDate ||
+        !location ||
+        !attendees
+      ) {
         toast.error("All fields are required");
         navigate("/createPost");
         return;
@@ -86,7 +95,8 @@ export default function CreatePost() {
           disc,
           image: uploadedImagePath,
           title,
-          eventDate,
+          eventStartDate,
+          eventEndDate,
           location,
           eventType,
           attendees,
@@ -198,13 +208,30 @@ export default function CreatePost() {
           ></textarea>
 
           <div className="flex justify-between items-center">
-            <input
-              type="date"
-              className="w-full p-2 outline-none border rounded-lg my-2"
-              onChange={(e) => {
-                setEventDate(e.target.value);
-              }}
-            />
+            <div className=" my-2">
+              <label className="text-sm text-bold ps-2">Start Date & Time</label>
+              <input
+                type="datetime-local"
+                className="w-full p-2 outline-none border rounded-lg"
+                onChange={(e) => {
+                  setEventStartDate(e.target.value); // This will capture both the date and time selected by the user
+                }}
+              />
+            </div>
+
+            <div className="my-2">
+              <label className="text-sm text-bold ps-2">End Date & Time</label>
+              <input
+                type="datetime-local"
+                className="w-full p-2 outline-none border rounded-lg "
+                onChange={(e) => {
+                  setEventEndDate(e.target.value); // This will capture both the date and time selected by the user
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center">
             <select
               className="w-full p-2 outline-none border rounded-lg my-2"
               onChange={(e) => {
@@ -223,9 +250,7 @@ export default function CreatePost() {
               <option value="Dallas">Dallas</option>
               <option value="San Jose">San Jose</option>
             </select>
-          </div>
 
-          <div className="flex justify-between items-center">
             <select
               className="w-full p-2 outline-none border rounded-lg my-2"
               onChange={(e) => {
