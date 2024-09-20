@@ -9,6 +9,7 @@ const cookies = new Cookies();
 
 export default function Profile() {
   const [myPosts, setMyPosts] = useState([]);
+  const [bookedEvents, setBookedEvents] = useState([]);
   const [myPost, setMyPost] = useState({});
   const [comment, setComment] = useState("");
   const [viewMyPost, setViewMyPost] = useState(false);
@@ -18,6 +19,7 @@ export default function Profile() {
   const [proPicModel, setProPicModel] = useState(false);
   const [profilePic, setProfilePic] = useState("");
   const targetProfilePictureInput = useRef("");
+  // console.log(bookedEvents);
 
   const { isLoggedIn, myPostId, setMyPostId } = useContext(AuthContext);
 
@@ -46,9 +48,10 @@ export default function Profile() {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
-        // setLogInUser(response.data.user);
+
         setUser(response.data.user);
         setMyPosts(response.data.myPost);
+        setBookedEvents(response.data.bookedEvents);
       } catch (error) {
         if (error.response) {
           toast.error(error.response.data.message);
@@ -289,21 +292,61 @@ export default function Profile() {
           <hr className="w-full mx-auto mt-2 mb-10" />
 
           {/* posts */}
-          <div className=" flex flex-wrap">
-            {myPosts.map((post) => (
-              <div key={post._id} className="w-full lg:w-1/3 p-1 ">
-                <div
-                  onClick={() => {
-                    setMyPost(post);
-                    setViewMyPost(true);
-                    setMyPostId(post._id);
-                  }}
-                  className="border border-gray-300 w-full aspect-square cursor-pointer h-full"
-                >
-                  <img className="w-full h-full" src={post.image} alt="" />
-                </div>
-              </div>
-            ))}
+          <div>
+            <h2 className="text-2xl font-bold mb-4 mt-8 ps-1 text-start">Your Events</h2>
+            <div className=" flex flex-wrap">
+              {myPosts?.length > 0 ? (
+                <>
+                  {myPosts?.map((post) => (
+                    <div key={post._id} className="w-full lg:w-1/3 p-1 ">
+                      <div
+                        onClick={() => {
+                          setMyPost(post);
+                          setViewMyPost(true);
+                          setMyPostId(post._id);
+                        }}
+                        className="border border-gray-300 w-full aspect-square cursor-pointer h-full"
+                      >
+                        <img className="w-full h-full" src={post.image} alt="" />
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <p className="text-center text-gray-600 mt-5">No events found.</p>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* registered events */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4 mt-8 ps-1 text-start">Your Booked Events</h2>
+            <div className=" flex flex-wrap">
+              {bookedEvents?.length > 0 ? (
+                <>
+                  {bookedEvents?.map((post) => (
+                    <div key={post._id} className="w-full p-1 ">
+                      <div
+                        onClick={() => {
+                          setMyPost(post);
+                          setViewMyPost(true);
+                          setMyPostId(post._id);
+                        }}
+                        className="border border-gray-300 w-full aspect-square cursor-pointer h-full"
+                      >
+                        <img className="w-full h-full" src={post.post.image} alt="" />
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <p className="text-center text-gray-600 mt-5">No booked events found.</p>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

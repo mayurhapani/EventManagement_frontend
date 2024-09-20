@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Cookies from "universal-cookie";
@@ -11,11 +11,11 @@ export default function RegisterEvent() {
   const [post, setPost] = useState({});
   const [user, setUser] = useState([]);
 
-  const [name, setName] = useState(0);
-  const [email, setEmail] = useState(0);
-  const [mobile, setMobile] = useState(0);
-  const [status, setStatus] = useState(0);
-  const [ticketCount, setTicketCount] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState(null);
+  const [status, setStatus] = useState("");
+  const [ticketCount, setTicketCount] = useState(1);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -83,40 +83,25 @@ export default function RegisterEvent() {
   }, [navigate, BASE_URL, id]);
 
   //register for event
-  const shareData = async () => {
+  const register = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      console.log(disc, title, eventStartDate, eventEndDate, location, attendees);
-
-      if (
-        !disc ||
-        !title ||
-        !price ||
-        !eventStartDate ||
-        !eventEndDate ||
-        !location ||
-        !attendees
-      ) {
+      if (!name || !email || !mobile || !status || !ticketCount) {
         toast.error("All fields are required");
-        navigate("/");
         return;
       }
 
       // data send to backend
-      const response = await axios.patch(
-        `${BASE_URL}/post/editPost`,
+      const response = await axios.post(
+        `${BASE_URL}/post/registerEvent`,
         {
-          postId: id,
-          disc,
-          image: imageUrl,
-          title,
-          price,
-          eventStartDate,
-          eventEndDate,
-          location,
-          eventType,
-          attendees,
+          post: post._id,
+          name,
+          email,
+          mobile,
+          status,
+          ticketCount,
         },
         {
           withCredentials: true,
@@ -128,7 +113,7 @@ export default function RegisterEvent() {
 
       if (response) {
         toast.success(response.data.message);
-        navigate("/");
+        navigate("/profile");
       } else {
         toast.error(response.data.message);
         navigate("/");
@@ -144,7 +129,7 @@ export default function RegisterEvent() {
 
   // handle  ticket count
   const handleDecrement = () => {
-    if (ticketCount > 0) {
+    if (ticketCount > 1) {
       setTicketCount(ticketCount - 1);
     }
   };
@@ -165,7 +150,7 @@ export default function RegisterEvent() {
               <h1 className=" font-bold">Register to event</h1>
               <button
                 onClick={() => {
-                  shareData();
+                  register();
                 }}
                 className="font-bold text-blue-600 text-sm"
               >
@@ -210,7 +195,7 @@ export default function RegisterEvent() {
             <input
               type="text"
               className="w-full p-2 outline-none border rounded-lg my-2"
-              placeholder="Write a Title....."
+              placeholder="Write a Name....."
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -218,7 +203,7 @@ export default function RegisterEvent() {
             <input
               type="text"
               className="w-full p-2 outline-none border rounded-lg my-2"
-              placeholder="Write a Title....."
+              placeholder="Write a Email....."
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -226,7 +211,7 @@ export default function RegisterEvent() {
             <input
               type="tel"
               className="w-full p-2 outline-none border rounded-lg my-2"
-              placeholder="Write a Title....."
+              placeholder="Write a Mobile....."
               onChange={(e) => {
                 setMobile(e.target.value);
               }}
@@ -234,7 +219,7 @@ export default function RegisterEvent() {
 
             <div className="flex flex-col lg:flex-row justify-between items-center">
               <select
-                className="w-full p-2 outline-none border rounded-lg my-2"
+                className="w-full p-2 outline-none border rounded-lg my-2 me-3"
                 onChange={(e) => {
                   setStatus(e.target.value);
                 }}
@@ -248,7 +233,7 @@ export default function RegisterEvent() {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={handleDecrement}
-                  className="bg-gray-300 text-gray-800 font-bold py-1 px-3 rounded-l focus:outline-none hover:bg-gray-400"
+                  className="bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-l focus:outline-none hover:bg-gray-400"
                 >
                   -
                 </button>
@@ -256,11 +241,11 @@ export default function RegisterEvent() {
                   type="number"
                   value={ticketCount}
                   readOnly
-                  className="w-16 text-center border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-16 text-center rounded-lg py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
                 <button
                   onClick={handleIncrement}
-                  className="bg-gray-300 text-gray-800 font-bold py-1 px-3 rounded-r focus:outline-none hover:bg-gray-400"
+                  className="bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-r focus:outline-none hover:bg-gray-400"
                 >
                   +
                 </button>
