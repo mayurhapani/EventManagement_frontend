@@ -10,7 +10,7 @@ export default function Header() {
     <>
       <div className=" bg-white fixed top-0 left-0 right-0 z-[500]">
         <div className="container mx-auto">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col lg:flex-row justify-between items-center">
             <h1 className="text-xl md:text-3xl font-bold text-gray-600 ">Sundaram Enterprise</h1>
             {/* <div className={`${isLoggedIn ? "block" : "hidden"} w-1/3 my-3`}>
               <form method="GET" action="">
@@ -43,27 +43,37 @@ export default function Header() {
               </form>
             </div> */}
             <nav>
-              <ul className="flex">
+              <ul className="flex ">
                 <Link to="/signin" className={isLoggedIn ? "hidden" : "block"}>
-                  <li className="py-3 px-6 text-xl font-semibold text-gray-600">SignIn</li>
+                  <li className="py-3 px-6 text-sm lg:text-xl font-semibold text-gray-600">
+                    SignIn
+                  </li>
                 </Link>
                 <Link to="/signup" className={isLoggedIn ? "hidden" : "block"}>
-                  <li className="py-3 px-6 text-xl font-semibold text-gray-600">Sign Up</li>
+                  <li className="py-3 px-6 text-sm lg:text-xl font-semibold text-gray-600">
+                    Sign Up
+                  </li>
                 </Link>
                 <Link to="/" className={isLoggedIn ? "block" : "hidden"}>
-                  <li className="py-2 px-3 text-xl font-semibold text-gray-600">Home</li>
+                  <li className="py-2 px-3 text-sm lg:text-xl font-semibold text-gray-600">Home</li>
                 </Link>
                 <Link to="/profile" className={isLoggedIn ? "block" : "hidden"}>
-                  <li className="py-2 px-3 text-xl font-semibold text-gray-600">Profile</li>
+                  <li className="py-2 px-3 text-sm lg:text-xl font-semibold text-gray-600">
+                    Profile
+                  </li>
                 </Link>
                 <Link to="/createPost" className={isLoggedIn ? "block" : "hidden"}>
-                  <li className="py-2 px-3 text-xl font-semibold text-gray-600">Create Event</li>
+                  <li className="py-2 px-3 text-sm lg:text-xl font-semibold text-gray-600">
+                    Create Event
+                  </li>
                 </Link>
                 <Link
                   onClick={() => setLogoutModel(true)}
                   className={isLoggedIn ? "block" : "hidden"}
                 >
-                  <li className="py-2 px-3 text-xl font-semibold text-gray-600">LogOut</li>
+                  <li className="py-2 px-3 text-sm lg:text-xl font-semibold text-gray-600">
+                    LogOut
+                  </li>
                 </Link>
               </ul>
             </nav>

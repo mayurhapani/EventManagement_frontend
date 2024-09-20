@@ -245,10 +245,10 @@ export default function Home() {
   return (
     <div className="">
       <div className="container mx-auto">
-        <div className="pt-32">
+        <div className="pt-20 lg:pt-32">
           {/* Event search bar */}
-          <div className="p-4 flex justify-between items-center">
-            <div className="bg-white border-2  shadow p-2 rounded-xl flex w-full">
+          <div className="p-4 flex flex-wrap justify-between items-center">
+            <div className="bg-white border-2 text-sm lg:text-base  shadow lg:p-2 rounded-xl flex w-full lg:w-[30%] mb-2 lg:mb-0">
               <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +271,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-white border-2  shadow p-2  rounded-xl flex w-full mx-2">
+            <div className="bg-white border-2 text-sm lg:text-base shadow lg:p-2  rounded-xl flex w-full lg:w-[30%] lg:mx-2 mb-2 lg:mb-0">
               <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +294,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-white border-2  shadow p-2  rounded-xl flex w-full me-2">
+            <div className="bg-white border-2 text-sm lg:text-base shadow lg:p-2  rounded-xl flex w-full lg:w-[30%] lg:me-2 mb-2 lg:mb-0">
               <input
                 type="datetime-local"
                 placeholder="Filter by date"
@@ -306,7 +306,7 @@ export default function Home() {
 
             <button
               onClick={clearFilters}
-              className="bg-red-500 text-white border-none py-2 px-4 cursor-pointer rounded-md hover:bg-red-600"
+              className="bg-red-500 text-white border-none text-sm lg:text-base py-1 lg:py-4 px-4 cursor-pointer rounded-md hover:bg-red-600"
             >
               Clear Filters
             </button>
@@ -315,7 +315,7 @@ export default function Home() {
           {/* Display filtered posts */}
           {searchActive ? (
             <>
-              <h2 className="text-2xl font-bold mb-4">Search Result</h2>
+              <h2 className="text-2xl font-bold mb-4 ps-1">Search Result</h2>
               <div className="rounded-sm flex flex-wrap">
                 {filteredPosts.length > 0 ? (
                   filteredPosts.map((post, index) => (
@@ -337,8 +337,8 @@ export default function Home() {
           ) : (
             <>
               {/* Upcoming Events */}
-              <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
-              <div className="rounded-sm flex flex-wrap">
+              <h2 className="text-2xl font-bold mb-4 ps-1">Upcoming Events</h2>
+              <div className="rounded-sm flex flex-wrap border-b-2 pb-4">
                 {upcomingEvents.length > 0 ? (
                   upcomingEvents.map((post, index) => (
                     <BlogCard
@@ -357,8 +357,8 @@ export default function Home() {
               </div>
 
               {/* Current Events */}
-              <h2 className="text-2xl font-bold mb-4 mt-8">Current Events</h2>
-              <div className="rounded-sm flex flex-wrap">
+              <h2 className="text-2xl font-bold mb-4 mt-8 ps-1 ">Current Events</h2>
+              <div className="rounded-sm flex flex-wrap border-b-2 pb-4">
                 {currentEvents.length > 0 ? (
                   currentEvents.map((post, index) => (
                     <BlogCard
@@ -377,8 +377,8 @@ export default function Home() {
               </div>
 
               {/* Past Events */}
-              <h2 className="text-2xl font-bold mb-4 mt-8">Past Events</h2>
-              <div className="rounded-sm flex flex-wrap">
+              <h2 className="text-2xl font-bold mb-4 mt-8 ps-1 ">Past Events</h2>
+              <div className="rounded-sm flex flex-wrap border-b-2 pb-4">
                 {pastEvents.length > 0 ? (
                   pastEvents.map((post, index) => (
                     <BlogCard

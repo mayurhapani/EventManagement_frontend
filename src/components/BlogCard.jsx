@@ -100,7 +100,7 @@ export default function BlogCard({
   };
 
   return (
-    <div className="p-2 w-1/3">
+    <div className="p-2 w-full md:w-1/2 lg:w-1/3">
       <div className="card border border-[rgb(173, 173, 173)] rounded-sm ">
         {/* card header */}
         <div className="flex justify-between items-center p-2 border-b border-[rgb(173, 173, 173)]">
