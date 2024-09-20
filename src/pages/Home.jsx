@@ -402,19 +402,19 @@ export default function Home() {
 
       {viewMyPost && (
         <div className="fixed w-screen h-screen top-0 left-0 bg-[rgba(27,28,24,0.34)]">
-          <div className="w-[80%] xl:w-[60%] h-[70%] mt-[8%] mx-auto bg-white flex">
-            <div className="w-full">
+          <div className="w-[80%] xl:w-[60%] h-[70%] mt-[30%] lg:mt-[8%] mx-auto bg-white flex  flex-col lg:flex-row">
+            <div className="w-full  overflow-hidden">
               <img className="w-full h-full aspect-auto" src={myPost.image} alt="" />
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full h-full">
               {/* Card header */}
-              <div className="flex justify-start items-center p-2 border-b-2 h-[12%]">
+              <div className="flex justify-start items-center p-2 border-b-2 h-[5rem]lg:min-h-[12%] overflow-hidden">
                 <img className="w-[40px] rounded-full me-5" src={myPost.user.image} alt="" />
-                <span className="font-semibold">@{myPost.user.username}</span>
+                <span className="font-semibold me-auto">@{myPost.user.username}</span>
               </div>
 
               {/* Comment section */}
-              <div className="h-[76%] overflow-y-scroll">
+              <div className="h-full lg:h-[76%] overflow-y-scroll">
                 {myPost.comments.length > 0 ? (
                   myPost.comments.map((comment, index) => (
                     <div className="p-2 flex items-center justify-between" key={index}>
@@ -435,7 +435,7 @@ export default function Home() {
                     </div>
                   ))
                 ) : (
-                  <div className="h-full w-full flex justify-center items-center">
+                  <div className="h-full w-full flex text-sm lg:text-base justify-center items-center">
                     <p>No Comments Yet</p>
                   </div>
                 )}
@@ -463,7 +463,7 @@ export default function Home() {
 
           {/* Close comment section */}
           <div
-            className="fixed top-5 right-5 cursor-pointer"
+            className="fixed top-[4.5rem] lg:top-5  right-5 cursor-pointer"
             onClick={() => {
               setViewMyPost(false);
               setMyPostId("");
