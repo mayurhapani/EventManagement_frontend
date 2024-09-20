@@ -11,4 +11,3 @@ VITE_BASE_URL=http://localhost:8001
 
 start command = npm run dev
 
-live site url = https://insta-clone-frontend-sand.vercel.app/
