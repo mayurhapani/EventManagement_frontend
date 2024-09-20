@@ -15,6 +15,7 @@ import Logout from "./components/Logout";
 import OtherUserProfile from "./pages/OtherUserProfile";
 import MyFollowing from "./pages/MyFollowing";
 import EditPost from "./pages/EditPost";
+import RegisterEvent from "./pages/RegisterEvent";
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
             <Route path="/editPost/:id" element={<EditPost />} />
             <Route path="/myFollowing" element={<MyFollowing />} />
             <Route path="/logout" element={<Logout />} />
+
+            <Route path="/registerEvent/:id" element={<RegisterEvent />} />
 
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />

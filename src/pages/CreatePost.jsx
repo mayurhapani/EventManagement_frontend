@@ -13,6 +13,7 @@ export default function CreatePost() {
   const [image, setImage] = useState(null);
   const [disc, setDisc] = useState("");
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
   const [eventStartDate, setEventStartDate] = useState("");
   const [eventEndDate, setEventEndDate] = useState("");
   const [location, setLocation] = useState("");
@@ -65,6 +66,7 @@ export default function CreatePost() {
         !image ||
         !disc ||
         !title ||
+        !price ||
         !eventStartDate ||
         !eventEndDate ||
         !location ||
@@ -95,6 +97,7 @@ export default function CreatePost() {
           disc,
           image: uploadedImagePath,
           title,
+          price,
           eventStartDate,
           eventEndDate,
           location,
@@ -136,153 +139,167 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="container mx-auto ">
-      <div className="pt-20 lg:pt-32 flex flex-col items-center">
-        <div className="max-w-[40rem] px-1 border border-[rgb(173, 173, 173)] rounded-sm">
-          {/* header */}
-          <div className="flex items-center p-1 border-b">
-            <img className="w-7 rounded-full" src={user.image} alt="" />
-            <span className="ms-3 text-sm font-bold">{user.username}</span>
-          </div>
-          <div className="flex p-2 border-b border-[rgb(173, 173, 173)]">
-            <h1 className="w-full text-center font-bold">Create New Event</h1>
-            <button
-              onClick={() => {
-                shareData();
-              }}
-              className="font-bold text-blue-600 text-sm"
-            >
-              Create
-            </button>
-          </div>
+    <div className="bg-red-50">
+      <div className="container mx-auto ">
+        <div className="pt-20 lg:pt-32 pb-10 flex flex-col items-center">
+          <div className="max-w-[40rem] px-1 border border-[rgb(173, 173, 173)] bg-white rounded-sm">
+            {/* header */}
+            <div className="flex items-center p-1 border-b">
+              <img className="w-7 rounded-full" src={user.image} alt="" />
+              <span className="ms-3 text-sm font-bold">{user.username}</span>
+            </div>
+            <div className="flex p-2 border-b border-[rgb(173, 173, 173)]">
+              <h1 className="w-full text-center font-bold">Create New Event</h1>
+              <button
+                onClick={() => {
+                  shareData();
+                }}
+                className="font-bold text-blue-600 text-sm"
+              >
+                Create
+              </button>
+            </div>
 
-          {/* image upload */}
-          <div className="">
-            <img
-              className="w-full h-56"
-              src={image ? URL.createObjectURL(image) : img1}
-              alt=""
-              id="output"
+            {/* image upload */}
+            <div className="">
+              <img
+                className="w-full h-56"
+                src={image ? URL.createObjectURL(image) : img1}
+                alt=""
+                id="output"
+              />
+
+              <div className="flex items-center justify-between bg-grey-lighter mb-3 w-full">
+                <label className="w-full flex justify-evenly items-center p-4 bg-zinc-300 rounded-lg shadow-lg tracking-wide uppercase border border-zinc-300 cursor-pointer hover:bg-zinc-600 hover:text-white">
+                  <svg
+                    className="w-8 h-8"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                  </svg>
+                  <span className="mt-2 text-base leading-normal">Select a event image</span>
+                  <input
+                    onChange={loadFile}
+                    accept="image/*"
+                    type="file"
+                    name="image"
+                    className="hidden"
+                  />
+                </label>
+              </div>
+            </div>
+
+            {/* content */}
+
+            <input
+              type="text"
+              className="w-full p-2 outline-none border rounded-lg my-2"
+              placeholder="Write a Title....."
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
             />
+            <textarea
+              className="w-full p-2 outline-none border rounded-lg"
+              placeholder="Write a description....."
+              onChange={(e) => {
+                setDisc(e.target.value);
+              }}
+              name=""
+              id=""
+            ></textarea>
 
-            <div className="flex items-center justify-between bg-grey-lighter mb-3 w-full">
-              <label className="w-full flex justify-evenly items-center p-4 bg-zinc-300 rounded-lg shadow-lg tracking-wide uppercase border border-zinc-300 cursor-pointer hover:bg-zinc-600 hover:text-white">
-                <svg
-                  className="w-8 h-8"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                </svg>
-                <span className="mt-2 text-base leading-normal">Select a event image</span>
+            <div className="flex flex-col lg:flex-row justify-between items-center my-2">
+              <div className=" my-2">
+                <label className="text-sm text-bold ps-2">Start Date & Time</label>
                 <input
-                  onChange={loadFile}
-                  accept="image/*"
-                  type="file"
-                  name="image"
-                  className="hidden"
+                  type="datetime-local"
+                  className="w-full p-2 outline-none border rounded-lg"
+                  onChange={(e) => {
+                    setEventStartDate(e.target.value); // This will capture both the date and time selected by the user
+                  }}
                 />
-              </label>
+              </div>
+
+              <div className="my-2 mx-2">
+                <label className="text-sm text-bold ps-2">End Date & Time</label>
+                <input
+                  type="datetime-local"
+                  className="w-full p-2 outline-none border rounded-lg "
+                  onChange={(e) => {
+                    setEventEndDate(e.target.value); // This will capture both the date and time selected by the user
+                  }}
+                />
+              </div>
+
+              <div className="my-2">
+                <label className="text-sm text-bold ps-2">Set ticket price</label>
+                <input
+                  type="number"
+                  placeholder="Ticket Price"
+                  className="w-full p-2 outline-none border rounded-lg "
+                  onChange={(e) => {
+                    setPrice(e.target.value); // This will capture both the date and time selected by the user
+                  }}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* content */}
-
-          <input
-            type="text"
-            className="w-full p-2 outline-none border rounded-lg my-2"
-            placeholder="Write a Title....."
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <textarea
-            className="w-full p-2 outline-none border rounded-lg"
-            placeholder="Write a description....."
-            onChange={(e) => {
-              setDisc(e.target.value);
-            }}
-            name=""
-            id=""
-          ></textarea>
-
-          <div className="flex flex-col lg:flex-row justify-between items-center">
-            <div className=" my-2">
-              <label className="text-sm text-bold ps-2">Start Date & Time</label>
-              <input
-                type="datetime-local"
-                className="w-full p-2 outline-none border rounded-lg"
+            <div className="flex flex-col lg:flex-row justify-between items-center">
+              <select
+                className="w-full p-2 outline-none border rounded-lg my-2"
                 onChange={(e) => {
-                  setEventStartDate(e.target.value); // This will capture both the date and time selected by the user
+                  setLocation(e.target.value);
                 }}
-              />
-            </div>
+              >
+                <option value="">Select event location</option>
+                <option value="New York">New York</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Houston">Houston</option>
+                <option value="Phoenix">Phoenix</option>
+                <option value="Philadelphia">Philadelphia</option>
+                <option value="San Antonio">San Antonio</option>
+                <option value="San Diego">San Diego</option>
+                <option value="Dallas">Dallas</option>
+                <option value="San Jose">San Jose</option>
+              </select>
 
-            <div className="my-2">
-              <label className="text-sm text-bold ps-2">End Date & Time</label>
-              <input
-                type="datetime-local"
-                className="w-full p-2 outline-none border rounded-lg "
+              <select
+                className="w-full p-2 outline-none border rounded-lg my-2"
                 onChange={(e) => {
-                  setEventEndDate(e.target.value); // This will capture both the date and time selected by the user
+                  setEventType(e.target.value);
                 }}
-              />
+              >
+                <option value="">Select event type</option>
+                <option value="Conference">Conference</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Concert">Concert</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Meetup">Meetup</option>
+                <option value="Festival">Festival</option>
+                <option value="Party">Party</option>
+              </select>
+
+              <select
+                className="w-full p-2 outline-none border rounded-lg my-2"
+                onChange={(e) => {
+                  setAttendees(e.target.value);
+                }}
+              >
+                <option value="">Enter max attendees</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="80">80</option>
+                <option value="100">100</option>
+              </select>
             </div>
-          </div>
-
-          <div className="flex flex-col lg:flex-row justify-between items-center">
-            <select
-              className="w-full p-2 outline-none border rounded-lg my-2"
-              onChange={(e) => {
-                setLocation(e.target.value);
-              }}
-            >
-              <option value="">Select event location</option>
-              <option value="New York">New York</option>
-              <option value="Los Angeles">Los Angeles</option>
-              <option value="Chicago">Chicago</option>
-              <option value="Houston">Houston</option>
-              <option value="Phoenix">Phoenix</option>
-              <option value="Philadelphia">Philadelphia</option>
-              <option value="San Antonio">San Antonio</option>
-              <option value="San Diego">San Diego</option>
-              <option value="Dallas">Dallas</option>
-              <option value="San Jose">San Jose</option>
-            </select>
-
-            <select
-              className="w-full p-2 outline-none border rounded-lg my-2"
-              onChange={(e) => {
-                setEventType(e.target.value);
-              }}
-            >
-              <option value="">Select event type</option>
-              <option value="Conference">Conference</option>
-              <option value="Wedding">Wedding</option>
-              <option value="Concert">Concert</option>
-              <option value="Workshop">Workshop</option>
-              <option value="Seminar">Seminar</option>
-              <option value="Meetup">Meetup</option>
-              <option value="Festival">Festival</option>
-              <option value="Party">Party</option>
-            </select>
-
-            <select
-              className="w-full p-2 outline-none border rounded-lg my-2"
-              onChange={(e) => {
-                setAttendees(e.target.value);
-              }}
-            >
-              <option value="">Enter max attendees</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="50">50</option>
-              <option value="80">80</option>
-              <option value="100">100</option>
-            </select>
           </div>
         </div>
       </div>

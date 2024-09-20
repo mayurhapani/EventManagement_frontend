@@ -11,6 +11,7 @@ export default function BlogCard({
   setNewCommentAdd,
   delComment,
   setDelComment,
+  registerDisable,
 }) {
   const [isLiked, setIsLiked] = useState(post.likes.includes(user._id));
   const [likesCount, setLikesCount] = useState(post.likes.length);
@@ -99,41 +100,45 @@ export default function BlogCard({
     navigate(`/otherUserProfile/${userId}`);
   };
 
+  const toRegisterPage = (postId) => {
+    navigate(`/registerEvent/${postId}`);
+  };
+
   return (
     <div className="p-2 w-full md:w-1/2 lg:w-1/3">
       <div className="card border border-[rgb(173, 173, 173)] rounded-sm ">
         {/* card header */}
         <div className="flex justify-between items-center p-2 border-b border-[rgb(173, 173, 173)]">
           <div className="flex items-center space-x-4">
-            <img className="w-[45px] h-[45px] rounded-full me-5" src={post.user.image} alt="" />
+            <img className="w-[45px] h-[45px] rounded-full me-2" src={post.user.image} alt="" />
             <span
               onClick={() => {
                 OtherUserPage(post.user._id);
               }}
-              className="font-semibold cursor-pointer hover:text-blue-800 hover:font-bold hover:underline transition-colors"
+              className="font-semibold text-sm cursor-pointer hover:text-blue-800 hover:font-bold hover:underline transition-colors"
             >
               Event organized by : @{post.user.username}
             </span>
           </div>
-          <div>
-            <span className="text-sm text-gray-600">
-              Start : {new Date(post.eventStartDate).toLocaleDateString()}{" "}
-              {new Date(post.eventStartDate).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-              })}
-            </span>
-            <br />
-            <span className="text-sm text-gray-600">
-              End : {new Date(post.eventEndDate).toLocaleDateString()}{" "}
-              {new Date(post.eventEndDate).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: true,
-              })}
-            </span>
-          </div>
+        </div>
+        <div className="flex justify-between items-center px-2">
+          <span className="text-xs text-gray-600">
+            Start : {new Date(post.eventStartDate).toLocaleDateString()}{" "}
+            {new Date(post.eventStartDate).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })}
+          </span>
+          <br />
+          <span className="text-xs text-gray-600">
+            End : {new Date(post.eventEndDate).toLocaleDateString()}{" "}
+            {new Date(post.eventEndDate).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })}
+          </span>
         </div>
 
         {/* card post image */}
@@ -158,15 +163,38 @@ export default function BlogCard({
                 favorite
               </span>
             )}
-            <span className="material-symbols-outlined me-2 text-2xl">maps_ugc</span>
+            <span
+              className="material-symbols-outlined me-2 text-2xl cursor-pointer"
+              onClick={() => {
+                setMyPostId(post._id);
+              }}
+            >
+              maps_ugc
+            </span>
             <span className="material-symbols-outlined text-2xl">send</span>
           </div>
           <span className="material-symbols-outlined text-2xl">bookmark</span>
         </div>
         {/* card footer */}
-        <div className="px-2">
-          <span className="pe-2">{likesCount}</span>
-          <span>likes</span>
+        <div className="my-2 px-2 flex justify-between items-center">
+          <div>
+            <span className="pe-2">{likesCount}</span>
+            <span>likes</span>
+          </div>
+          <div>
+            {registerDisable ? (
+              ""
+            ) : (
+              <button
+                className={`px-5 py-1 bg-green-400 hover:bg-green-800 text-white font-semibold`}
+                onClick={() => {
+                  toRegisterPage(post._id);
+                }}
+              >
+                Register Now!
+              </button>
+            )}
+          </div>
         </div>
         {/* title / description */}
         <div className="my-2 border-t border-[rgb(173, 173, 173)]">
@@ -193,8 +221,17 @@ export default function BlogCard({
             <span className="text-black ">
               <span className="font-bold">Event Type :</span> {post.eventType}
             </span>
+          </div>
+        </div>
+
+        {/* event details */}
+        <div className="px-2 py-1 border-t border-[rgb(173, 173, 173)]">
+          <div className="flex justify-between items-center text-sm text-gray-600">
             <span className="text-black ">
               <span className="font-bold">Max Attendees :</span> {post.attendees}
+            </span>
+            <span className="text-black ">
+              <span className="font-bold">Ticket Price :</span> {post?.price}
             </span>
           </div>
         </div>
@@ -245,6 +282,7 @@ BlogCard.propTypes = {
     eventEndDate: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
     eventType: PropTypes.string.isRequired,
     attendees: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
@@ -260,4 +298,5 @@ BlogCard.propTypes = {
   setNewCommentAdd: PropTypes.func.isRequired,
   delComment: PropTypes.bool.isRequired,
   setDelComment: PropTypes.func.isRequired,
+  registerDisable: PropTypes.bool.isRequired,
 };

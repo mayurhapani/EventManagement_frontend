@@ -13,6 +13,7 @@ export default function EditPost() {
   const [imageUrl, setImageUrl] = useState("");
   const [disc, setDisc] = useState("");
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
   const [eventStartDate, setEventStartDate] = useState("");
   const [eventEndDate, setEventEndDate] = useState("");
   const [location, setLocation] = useState("");
@@ -103,7 +104,15 @@ export default function EditPost() {
 
       console.log(image, disc, title, eventStartDate, eventEndDate, location, attendees);
 
-      if (!disc || !title || !eventStartDate || !eventEndDate || !location || !attendees) {
+      if (
+        !disc ||
+        !title ||
+        !price ||
+        !eventStartDate ||
+        !eventEndDate ||
+        !location ||
+        !attendees
+      ) {
         toast.error("All fields are required");
         navigate("/");
         return;
@@ -132,6 +141,7 @@ export default function EditPost() {
           disc,
           image: imageUrl,
           title,
+          price,
           eventStartDate,
           eventEndDate,
           location,
@@ -260,7 +270,7 @@ export default function EditPost() {
               />
             </div>
 
-            <div className="my-2">
+            <div className="my-2 mx-2">
               <label className="text-sm text-bold ps-2">End Date & Time</label>
               <input
                 type="datetime-local"
@@ -268,6 +278,18 @@ export default function EditPost() {
                 value={eventEndDate}
                 onChange={(e) => {
                   setEventEndDate(e.target.value); // This will capture both the date and time selected by the user
+                }}
+              />
+            </div>
+
+            <div className="my-2">
+              <label className="text-sm text-bold ps-2">Set ticket price</label>
+              <input
+                type="number"
+                placeholder="Ticket Price"
+                className="w-full p-2 outline-none border rounded-lg "
+                onChange={(e) => {
+                  setPrice(e.target.value); // This will capture both the date and time selected by the user
                 }}
               />
             </div>

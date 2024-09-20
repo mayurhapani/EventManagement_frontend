@@ -294,7 +294,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-white border-2 text-sm lg:text-base shadow lg:p-2  rounded-xl flex w-full lg:w-[30%] lg:me-2 mb-2 lg:mb-0">
+            <div className="bg-white border-2 text-sm lg:text-base shadow lg:p-2  rounded-xl flex w-full lg:w-[25%] lg:me-2 mb-2 lg:mb-0">
               <input
                 type="datetime-local"
                 placeholder="Filter by date"
@@ -306,7 +306,7 @@ export default function Home() {
 
             <button
               onClick={clearFilters}
-              className="bg-red-500 text-white border-none text-sm lg:text-base py-1 lg:py-4 px-4 cursor-pointer rounded-md hover:bg-red-600"
+              className="bg-red-500 lg:w-[10%] text-white border-none text-sm lg:text-base py-1 lg:py-4 px-4 cursor-pointer rounded-md hover:bg-red-600"
             >
               Clear Filters
             </button>
@@ -389,6 +389,7 @@ export default function Home() {
                       setNewCommentAdd={setNewCommentAdd}
                       delComment={delComment}
                       setDelComment={setDelComment}
+                      registerDisable={true}
                     />
                   ))
                 ) : (
@@ -463,7 +464,7 @@ export default function Home() {
 
           {/* Close comment section */}
           <div
-            className="fixed top-[4.5rem] lg:top-5  right-5 cursor-pointer"
+            className="fixed top-[4.5rem] lg:top-10  right-5 cursor-pointer"
             onClick={() => {
               setViewMyPost(false);
               setMyPostId("");
