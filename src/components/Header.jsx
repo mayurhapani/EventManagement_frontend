@@ -8,7 +8,7 @@ export default function Header() {
 
   return (
     <>
-      <div className=" bg-white fixed top-0 left-0 right-0">
+      <div className=" bg-white fixed top-0 left-0 right-0 z-[500]">
         <div className="container mx-auto">
           <div className="flex justify-between items-center">
             <h1 className="text-xl md:text-3xl font-bold text-gray-600 ">Sundaram Enterprise</h1>
@@ -71,7 +71,7 @@ export default function Header() {
         </div>
       </div>
       {logoutModel && (
-        <div className=" fixed w-screen h-screen top-0 left-0 bottom-0 bg-[rgba(27,28,24,0.34)]">
+        <div className=" fixed w-screen h-screen top-0 left-0 bottom-0 bg-[rgba(27,28,24,0.34)] z-[1000">
           <div className="flex justify-center items-center h-full">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-10 text-center">

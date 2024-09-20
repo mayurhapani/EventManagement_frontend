@@ -26,6 +26,11 @@ export default function Profile() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
+    setViewMyPost(false);
+    setMyPostId("");
+  }, [myPostId]);
+
+  useEffect(() => {
     const token = localStorage.getItem("token") || cookies.get("token");
 
     if (!token) {
@@ -83,6 +88,20 @@ export default function Profile() {
 
     fetchMyPosts();
   }, [myPostId, viewMyPost, newCommentAdd, delComment]);
+
+  // edit post
+  const editPost = async (id) => {
+    try {
+      setViewMyPost(false);
+      navigate(`/editPost/${id}`);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(error.message);
+      }
+    }
+  };
 
   //! delete post
   const deletePost = async (id) => {
@@ -301,6 +320,14 @@ export default function Profile() {
               <div className="flex justify-start items-center p-2 border-b-2 h-[12%]">
                 <img className="w-[40px] rounded-full me-5" src={myPost.user.image} alt="" />
                 <span className="font-semibold me-auto">@ {myPost.user.username}</span>
+                <span
+                  onClick={() => {
+                    editPost(myPost._id);
+                  }}
+                  className="material-symbols-outlined py-2 px-1 cursor-pointer text-blue-700 me-3"
+                >
+                  edit
+                </span>
                 <span
                   onClick={() => {
                     deletePost(myPost._id);

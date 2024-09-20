@@ -248,7 +248,7 @@ export default function Home() {
         <div className="pt-32">
           {/* Event search bar */}
           <div className="p-4 flex justify-between items-center">
-            <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full">
+            <div className="bg-white border-2  shadow p-2 rounded-xl flex w-full">
               <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +271,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full mx-2">
+            <div className="bg-white border-2  shadow p-2  rounded-xl flex w-full mx-2">
               <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +294,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="bg-white border-2  shadow p-2 relative rounded-xl flex w-full me-2">
+            <div className="bg-white border-2  shadow p-2  rounded-xl flex w-full me-2">
               <input
                 type="datetime-local"
                 placeholder="Filter by date"

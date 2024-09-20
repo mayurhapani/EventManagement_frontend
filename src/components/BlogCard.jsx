@@ -137,7 +137,7 @@ export default function BlogCard({
         </div>
 
         {/* card post image */}
-        <div className="w-full aspect-w-4 aspect-h-2">
+        <div className="w-full aspect-h-2">
           <img className="object-cover w-full h-full" src={post.image} alt="" />
         </div>
         {/* card content */}
@@ -237,7 +237,7 @@ export default function BlogCard({
 BlogCard.propTypes = {
   post: PropTypes.shape({
     user: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
+      _id: PropTypes.string,
       image: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
     }).isRequired,
