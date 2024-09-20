@@ -257,10 +257,10 @@ export default function Profile() {
   return (
     <>
       <div className="container mx-auto ">
-        <div className="pt-32 flex flex-col items-center w-1/2 mx-auto">
+        <div className="pt-20 lg:pt-32 flex flex-col items-center lg:w-1/2 mx-auto">
           {/* header */}
           <div className="w-full">
-            <div className="flex items-center">
+            <div className="flex flex-col lg:flex-row items-center">
               <img
                 className="rounded-full w-32 h-32 cursor-pointer"
                 onClick={() => {
@@ -269,7 +269,7 @@ export default function Profile() {
                 src={user.image}
                 alt="https://via.placeholder.com/150"
               />
-              <div className="ps-5">
+              <div className="lg:ps-5">
                 <h1 className="text-3xl font-bold text-center mb-5 ">{user.username}</h1>
                 <div className="flex items-center">
                   <p className="text-sm text-gray-600 font-semibold me-4">
@@ -291,7 +291,7 @@ export default function Profile() {
           {/* posts */}
           <div className=" flex flex-wrap">
             {myPosts.map((post) => (
-              <div key={post._id} className="w-1/3 p-1 ">
+              <div key={post._id} className="w-full lg:w-1/3 p-1 ">
                 <div
                   onClick={() => {
                     setMyPost(post);
@@ -311,15 +311,15 @@ export default function Profile() {
       {/* view my post */}
       {viewMyPost && (
         <div className=" fixed w-screen h-screen top-0 left-0 bottom-0 bg-[rgba(27,28,24,0.34)]">
-          <div className="w-[80%] xl:w-[60%] h-[70%]  mt-[8%] mx-auto bg-white flex">
-            <div className="w-full">
+          <div className="w-[80%] xl:w-[60%] h-[70%] mt-[30%] lg:mt-[8%] mx-auto bg-white flex flex-col lg:flex-row">
+            <div className="w-full overflow-hidden">
               <img className="w-full h-full aspect-auto" src={myPost.image} alt="" />
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full h-full">
               {/* card header */}
-              <div className="flex justify-start items-center p-2 border-b-2 h-[12%]">
+              <div className="flex justify-start items-center p-2 border-b-2 h-[5rem] lg:min-h-[12%] overflow-hidden">
                 <img className="w-[40px] rounded-full me-5" src={myPost.user.image} alt="" />
-                <span className="font-semibold me-auto">@ {myPost.user.username}</span>
+                <span className="font-semibold me-auto ">@ {myPost.user.username}</span>
                 <span
                   onClick={() => {
                     editPost(myPost._id);
@@ -339,7 +339,7 @@ export default function Profile() {
               </div>
 
               {/* comment section */}
-              <div className="h-[76%] overflow-y-scroll">
+              <div className="h-full lg:h-[76%] overflow-y-scroll">
                 {myPost.comments.length > 0 ? (
                   myPost.comments.map((comment, index) => (
                     <div className="p-2 flex items-center justify-between" key={index}>
@@ -360,7 +360,7 @@ export default function Profile() {
                     </div>
                   ))
                 ) : (
-                  <div className="h-full w-full flex justify-center items-center">
+                  <div className="h-full w-full text-sm lg:text-base flex justify-center items-center">
                     <p>No Comments Yet</p>
                   </div>
                 )}
@@ -392,7 +392,7 @@ export default function Profile() {
 
           {/* close comment section */}
           <div
-            className=" fixed top-5 right-5 cursor-pointer"
+            className=" fixed top-[4.5rem] lg:top-5 right-5 cursor-pointer]"
             onClick={() => {
               setViewMyPost(false);
               setMyPostId("");
