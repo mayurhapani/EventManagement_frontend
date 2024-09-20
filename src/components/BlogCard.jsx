@@ -121,6 +121,7 @@ export default function BlogCard({
             </span>
           </div>
         </div>
+        {/* date */}
         <div className="flex justify-between items-center px-2">
           <span className="text-xs text-gray-600">
             Start : {new Date(post.eventStartDate).toLocaleDateString()}{" "}

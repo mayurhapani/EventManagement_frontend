@@ -11,8 +11,8 @@ const cookies = new Cookies();
 export default function EditPost() {
   const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [disc, setDisc] = useState("");
   const [title, setTitle] = useState("");
+  const [disc, setDisc] = useState("");
   const [price, setPrice] = useState(0);
   const [eventStartDate, setEventStartDate] = useState("");
   const [eventEndDate, setEventEndDate] = useState("");
