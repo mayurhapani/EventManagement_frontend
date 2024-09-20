@@ -12,41 +12,11 @@ export default function Header() {
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <h1 className="text-xl md:text-3xl font-bold text-gray-600 ">Sundaram Enterprise</h1>
-            {/* <div className={`${isLoggedIn ? "block" : "hidden"} w-1/3 my-3`}>
-              <form method="GET" action="">
-                <div className="bg-white border-2  shadow p-2 relative rounded-xl flex">
-                  <span className="w-auto flex justify-end  items-center text-gray-500 p-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </span>
-                  <input
-                    name="episodequery"
-                    id="title"
-                    className="border-white outline-none border-0 w-full rounded-xl p-2"
-                    type="text"
-                    placeholder="Search Events"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-black hover:bg-gray-700 rounded-xl text-white text-xl p-2 pl-4 pr-4 ml-2"
-                  >
-                    <p className="font-semibold text-xs">Search</p>
-                  </button>
-                </div>
-              </form>
-            </div> */}
             <nav>
               <ul className="flex ">
                 <Link to="/signin" className={isLoggedIn ? "hidden" : "block"}>
                   <li className="py-3 px-6 text-sm lg:text-xl font-semibold text-gray-600">
-                    SignIn
+                    Sign In
                   </li>
                 </Link>
                 <Link to="/signup" className={isLoggedIn ? "hidden" : "block"}>

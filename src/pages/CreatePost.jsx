@@ -137,8 +137,8 @@ export default function CreatePost() {
 
   return (
     <div className="container mx-auto ">
-      <div className="pt-32 flex flex-col items-center">
-        <div className="max-w-[40rem] border border-[rgb(173, 173, 173)] rounded-sm">
+      <div className="pt-20 lg:pt-32 flex flex-col items-center">
+        <div className="max-w-[40rem] px-1 border border-[rgb(173, 173, 173)] rounded-sm">
           {/* header */}
           <div className="flex items-center p-1 border-b">
             <img className="w-7 rounded-full" src={user.image} alt="" />
@@ -207,7 +207,7 @@ export default function CreatePost() {
             id=""
           ></textarea>
 
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col lg:flex-row justify-between items-center">
             <div className=" my-2">
               <label className="text-sm text-bold ps-2">Start Date & Time</label>
               <input
@@ -231,7 +231,7 @@ export default function CreatePost() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col lg:flex-row justify-between items-center">
             <select
               className="w-full p-2 outline-none border rounded-lg my-2"
               onChange={(e) => {

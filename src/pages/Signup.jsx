@@ -57,7 +57,7 @@ export default function Signup() {
     <div className=" bg-[url(./assets/images/main_bg.jfif)] bg-no-repeat bg-cover h-screen">
       <div className="container mx-auto ">
         <div className="flex justify-center items-center h-screen">
-          <div className="bg-red-100 p-10 rounded-md text-center">
+          <div className="bg-red-100 px-10 py-6 mt-24 lg:mt-10 rounded-md text-center">
             <img className="w-40 mx-auto" src={logo} alt="" />
             <h1 className="mb-5 text-xl font-semibold text-gray-600">
               Sign up to see photos and videos <br /> from your friends.
