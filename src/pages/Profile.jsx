@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import Cookies from "universal-cookie";
+import EventCard from "../components/EventCard";
 
 const cookies = new Cookies();
 
@@ -326,19 +327,8 @@ export default function Profile() {
             <div className=" flex flex-wrap">
               {bookedEvents?.length > 0 ? (
                 <>
-                  {bookedEvents?.map((post) => (
-                    <div key={post._id} className="w-full p-1 ">
-                      <div
-                        onClick={() => {
-                          setMyPost(post);
-                          setViewMyPost(true);
-                          setMyPostId(post._id);
-                        }}
-                        className="border border-gray-300 w-full aspect-square cursor-pointer h-full"
-                      >
-                        <img className="w-full h-full" src={post.post.image} alt="" />
-                      </div>
-                    </div>
+                  {bookedEvents?.map((event) => (
+                    <EventCard event={event} user={user} key={event._id} />
                   ))}
                 </>
               ) : (
