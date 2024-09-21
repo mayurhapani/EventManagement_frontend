@@ -43,13 +43,6 @@ export default function RegisterEvent() {
         });
 
         setPost(response.data);
-
-        //date formating
-        // const startDate = new Date(response.data.eventStartDate);
-        // const formattedStartDate = startDate.toISOString().slice(0, 16);
-
-        // const endDate = new Date(response.data.eventEndDate);
-        // const formattedEndDate = endDate.toISOString().slice(0, 16);
       } catch (error) {
         if (error.response) {
           toast.error(error.response.data.message);
@@ -112,6 +105,21 @@ export default function RegisterEvent() {
       );
 
       if (response) {
+        const response2 = await axios.patch(
+          `${BASE_URL}/post/addTicketCount`,
+          {
+            post: post._id,
+            ticketCount,
+          },
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        toast.success(response2.data.message);
         toast.success(response.data.message);
         navigate("/profile");
       } else {
@@ -135,7 +143,7 @@ export default function RegisterEvent() {
   };
 
   const handleIncrement = () => {
-    if (ticketCount < 10) {
+    if (ticketCount < post.attendees - post.registeredUser) {
       setTicketCount(ticketCount + 1);
     }
   };
@@ -250,6 +258,15 @@ export default function RegisterEvent() {
                   +
                 </button>
               </div>
+            </div>
+
+            {/* remaining tickets */}
+            <div className="flex flex-col lg:flex-row justify-between px-5 my-2 items-center">
+              <span className="text-gray-600 text-xs">Total Tickets : {post.attendees}</span>
+
+              <span className="text-gray-600 text-xs">
+                Remaining Tickets : {post.attendees - post.registeredUser}
+              </span>
             </div>
           </div>
         </div>
