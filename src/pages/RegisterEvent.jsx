@@ -9,7 +9,6 @@ const cookies = new Cookies();
 
 export default function RegisterEvent() {
   const [post, setPost] = useState({});
-  const [user, setUser] = useState([]);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -52,27 +51,7 @@ export default function RegisterEvent() {
       }
     };
 
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/getUser`, {
-          withCredentials: true,
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
-
-        setUser(response.data.user);
-      } catch (error) {
-        if (error.response) {
-          toast.error(error.response.data.message);
-        } else {
-          toast.error(error.message);
-        }
-      }
-    };
-
     fetchMyPosts();
-    fetchUser();
   }, [navigate, BASE_URL, id]);
 
   //register for event
