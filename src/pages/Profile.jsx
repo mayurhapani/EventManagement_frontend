@@ -371,6 +371,13 @@ export default function Profile() {
                 </span>
               </div>
 
+              <div className=" p-2 border-b-2 ">
+                <span className="me-auto ">
+                  <span className="font-semibold ">Event Title : </span>
+                  {myPost.title}
+                </span>
+              </div>
+
               {/* comment section */}
               <div className="h-full lg:h-[76%] overflow-y-scroll">
                 {myPost.comments.length > 0 ? (
@@ -425,7 +432,7 @@ export default function Profile() {
 
           {/* close comment section */}
           <div
-            className=" fixed top-[4.5rem] lg:top-5 right-5 cursor-pointer]"
+            className=" fixed top-[4.5rem] lg:top-10 right-5 cursor-pointer"
             onClick={() => {
               setViewMyPost(false);
               setMyPostId("");
