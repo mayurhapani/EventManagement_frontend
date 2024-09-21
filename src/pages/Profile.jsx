@@ -277,13 +277,13 @@ export default function Profile() {
                 <h1 className="text-3xl font-bold text-center mb-5 ">{user.username}</h1>
                 <div className="flex items-center">
                   <p className="text-sm text-gray-600 font-semibold me-4">
-                    <span>{myPosts.length ? myPosts.length : "0"}</span> My Events
+                    My Events : <span>{myPosts.length ? myPosts.length : "0"}</span>
                   </p>
                   <p className="text-sm text-gray-600 font-semibold me-4">
-                    <span>{user.followers ? user.followers.length : "0"}</span> Followers
+                    Followers : <span>{user.followers ? user.followers.length : "0"}</span>
                   </p>
                   <p className="text-sm text-gray-600 font-semibold">
-                    <span>{user.following ? user.following.length : "0"}</span> Following
+                    Following : <span>{user.following ? user.following.length : "0"}</span>
                   </p>
                 </div>
               </div>

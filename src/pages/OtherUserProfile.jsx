@@ -224,13 +224,13 @@ export default function OtherUserProfile() {
                   </div>
                   <div className="flex items-center">
                     <p className="text-sm text-gray-600 font-semibold me-4">
-                      <span>{posts.length || 0}</span> Posts
+                      My Events : <span>{posts.length || 0}</span>
                     </p>
                     <p className="text-sm text-gray-600 font-semibold me-4">
-                      <span>{user.followers.length || 0}</span> Followers
+                      Followers : <span>{user.followers.length || 0}</span>
                     </p>
                     <p className="text-sm text-gray-600 font-semibold">
-                      <span>{user.following.length || 0}</span> Following
+                      Following : <span>{user.following.length || 0}</span>
                     </p>
                   </div>
                 </div>
@@ -245,11 +245,9 @@ export default function OtherUserProfile() {
                 <div key={post._id} className="w-1/3 p-1 ">
                   <div
                     onClick={() => {
-                      // setUserPost(post);
-                      // setViewPost(true);
                       setUserPostId(post._id);
                     }}
-                    className="border border-gray-300 w-full aspect-square cursor-pointer"
+                    className="border border-gray-300 w-full aspect-square cursor-pointer h-full"
                   >
                     <img className="w-full h-full" src={post.image} alt="" />
                   </div>
